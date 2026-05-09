@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem -Recurse -Force)",
+      "Bash(Select-Object FullName, PSIsContainer)",
+      "PowerShell(head *)",
+      "PowerShell(Get-ChildItem -Path \"C:\\\\Arcflame\\\\lead_arcade_games\\\\health-shield\" | Where-Object { -not $_.Name.StartsWith\\('.'\\) } | Format-Table Name, PSIsContainer)",
+      "Bash(Get-ChildItem *)",
+      "PowerShell(Get-ChildItem -Path \"C:\\\\Arcflame\\\\lead_arcade_games\\\\health-shield\" -Exclude node_modules | Format-List Name, @{Name=\"Type\"; Expression={if\\($_.PSIsContainer\\) {\"DIR\"} else {\"FILE\"}}} | Out-String)",
+      "Bash(npx tsc *)"
+    ]
+  }
+}

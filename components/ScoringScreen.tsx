@@ -60,7 +60,7 @@ const ScoringScreen: React.FC<Props> = ({ result, playerName, playerMobile, onPl
 
   if (booked) {
     return (
-      <div className="screen-scroll flex flex-col items-center justify-center min-h-screen px-6 py-12 text-center" style={{ background: BLUE }}>
+      <div className="screen-scroll flex min-h-full flex-col items-center justify-center px-6 py-12 text-center" style={{ background: BLUE }}>
         <h2 className="text-white text-4xl font-extrabold pop">THANK YOU!</h2>
         <h3 className="font-extrabold text-2xl mt-2 mb-5 pop" style={{ color: ORANGE }}>
           {playerName.toUpperCase()}
@@ -80,24 +80,24 @@ const ScoringScreen: React.FC<Props> = ({ result, playerName, playerMobile, onPl
   return (
     <div
       className="screen-scroll"
-      style={{ position: 'relative', backgroundColor: hasBg ? '#111' : '#EEF2FF' }}
+      style={{ position: 'relative', backgroundColor: hasBg ? '#111' : '#EEF2FF', height: '100%', minHeight: '100%', display: 'flex', flexDirection: 'column' }}
     >
       {hasBg && <>
         <div aria-hidden style={{
-          position: 'absolute', inset: 0,
+          position: 'fixed', inset: 0,
           backgroundImage: `url(${SCORING_BG_IMAGE})`,
           backgroundSize: 'cover', backgroundPosition: 'center',
           filter: 'blur(14px)', transform: 'scale(1.1)',
           zIndex: 0, pointerEvents: 'none',
         }} />
         <div aria-hidden style={{
-          position: 'absolute', inset: 0,
+          position: 'fixed', inset: 0,
           background: 'rgba(0,0,0,0.5)',
           zIndex: 1, pointerEvents: 'none',
         }} />
       </>}
 
-      <div style={{ position: 'relative', zIndex: 2 }}>
+      <div style={{ position: 'relative', zIndex: 2, display: 'flex', flexDirection: 'column', flex: 1 }}>
         {showBook && (
           <BookSlotModal
             name={playerName}
@@ -107,10 +107,13 @@ const ScoringScreen: React.FC<Props> = ({ result, playerName, playerMobile, onPl
           />
         )}
 
-        {/* Header */}
+        {/* Header — anchored top, respects device safe-area */}
         <div
-          className="px-6 pt-7 pb-6 text-center"
-          style={hasBg ? undefined : { background: 'linear-gradient(135deg, #003DA6, #172554)' }}
+          className="px-6 pb-6 text-center"
+          style={{
+            paddingTop: 'max(1.75rem, env(safe-area-inset-top))',
+            ...(hasBg ? {} : { background: 'linear-gradient(135deg, #003DA6, #172554)' }),
+          }}
         >
           <h2 className="text-white text-2xl font-extrabold" style={hasBg ? { textShadow: '0 2px 10px rgba(0,0,0,0.6)' } : undefined}>
             Hi {playerName}!
@@ -140,7 +143,7 @@ const ScoringScreen: React.FC<Props> = ({ result, playerName, playerMobile, onPl
               style={{ background: 'rgba(35,231,108,0.10)', border: '1px solid rgba(35,231,108,0.35)' }}
             >
               <span className="text-[9px] font-extrabold uppercase tracking-wide text-center leading-tight" style={{ color: '#23e76c' }}>
-                Wealth{'\n'}Gainers
+                Points{'\n'}Gained
               </span>
               <span className="text-lg font-extrabold leading-none" style={{ color: '#23e76c' }}>
                 +{gainPts.toLocaleString()}
@@ -196,7 +199,7 @@ const ScoringScreen: React.FC<Props> = ({ result, playerName, playerMobile, onPl
               style={{ background: 'rgba(255,45,120,0.10)', border: '1px solid rgba(255,45,120,0.35)' }}
             >
               <span className="text-[9px] font-extrabold uppercase tracking-wide text-center leading-tight" style={{ color: '#ff2d78' }}>
-                Wealth{'\n'}Drainers
+                Points{'\n'}Drained
               </span>
               <span className="text-lg font-extrabold leading-none" style={{ color: '#ff2d78' }}>
                 -{drainPts.toLocaleString()}
@@ -219,7 +222,10 @@ const ScoringScreen: React.FC<Props> = ({ result, playerName, playerMobile, onPl
           </p>
         </div>
 
-        {/* Actions */}
+        {/* Spacer — pushes action buttons toward vertical center */}
+        <div style={{ flex: 1 }} />
+
+        {/* Actions — centered in remaining space */}
         <div className="px-4 py-4 space-y-3">
           <button
             className="w-full py-3.5 rounded-xl font-bold text-white text-sm btn-press"
@@ -264,7 +270,17 @@ const ScoringScreen: React.FC<Props> = ({ result, playerName, playerMobile, onPl
           </button>
         </div>
 
-        <p className="px-4 pb-8 text-[9px] leading-relaxed" style={{ color: hasBg ? 'rgba(255,255,255,0.5)' : '#9ca3af' }}>
+        {/* Spacer — keeps disclaimer at bottom */}
+        <div style={{ flex: 1 }} />
+
+        {/* Disclaimer — anchored bottom, respects device safe-area */}
+        <p
+          className="px-4 text-[9px] leading-relaxed"
+          style={{
+            color: hasBg ? 'rgba(255,255,255,0.5)' : '#9ca3af',
+            paddingBottom: 'max(2rem, env(safe-area-inset-bottom))',
+          }}
+        >
           DISCLAIMER: {DISCLAIMER}
         </p>
       </div>

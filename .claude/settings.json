@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem -Path \"c:\\\\Arcflame\\\\lead_arcade_games\\\\health-shield\" -Force)",
+      "Bash(Select-Object Name, FullName)",
+      "Read(//c/Arcflame/lead_arcade_games/**)"
+    ]
+  }
+}

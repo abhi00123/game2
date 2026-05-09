@@ -32,7 +32,7 @@ const EnterDetailsScreen: React.FC<Props> = ({ onSubmit }) => {
 
   return (
     <div
-      className="screen-scroll flex min-h-screen items-center justify-center px-6 py-10"
+      className="screen-scroll flex min-h-full items-center justify-center px-6 py-10"
       style={{ background: '#080d1a' }}
     >
       {showTC && <TCModal onClose={() => setShowTC(false)} />}

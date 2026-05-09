@@ -1087,7 +1087,7 @@ const GameScreen: React.FC<Props> = ({ onGameEnd }) => {
   const urgent = hud.timeLeft <= 20;
 
   return (
-    <div style={{ background: '#0d0024', width: '100%', height: '100vh', position: 'relative' }}>
+    <div style={{ background: '#0d0024', width: '100%', height: '100%', minHeight: '100%', position: 'relative' }}>
       <div
         className="absolute left-0 right-0 top-0 z-10 flex items-center justify-between px-4 py-2"
         style={{

@@ -6,19 +6,19 @@ interface Props {
 
 const IntroScreen: React.FC<Props> = ({ onPlay }) => (
   <div
-    className="screen-scroll flex min-h-screen w-full flex-col items-center justify-center"
+    className="screen-scroll flex min-h-full w-full flex-col items-center justify-center"
     style={{
       background: 'radial-gradient(circle at top, #24104b 0%, #120326 52%, #080114 100%)',
     }}
   >
-    <div className="relative flex min-h-screen w-full max-w-md flex-col justify-end overflow-hidden px-4 pb-6 pt-4">
+    <div className="relative flex h-full min-h-0 w-full max-w-md flex-col justify-end overflow-hidden px-4">
       <div className="pointer-events-none absolute inset-x-0 top-0 bottom-0 overflow-hidden rounded-none">
         <img
           src="/intro_page.png"
           alt="Pulse Breaker intro"
           className="h-full w-full object-cover object-top"
           style={{
-            minHeight: 'calc(100vh - 0.5rem)',
+            minHeight: 'var(--app-height, 100vh)',
           }}
         />
       </div>
@@ -30,7 +30,13 @@ const IntroScreen: React.FC<Props> = ({ onPlay }) => (
         }}
       />
 
-      <div className="relative z-10 mt-auto">
+      <div
+        className="relative z-10 mt-auto w-full"
+        style={{
+          paddingTop: 'max(1rem, env(safe-area-inset-top))',
+          paddingBottom: 'max(1.5rem, env(safe-area-inset-bottom))',
+        }}
+      >
         <button
           onClick={onPlay}
           className="w-full rounded-full py-4 text-lg font-extrabold tracking-wide text-white btn-press"
